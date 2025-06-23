@@ -6,45 +6,57 @@
     <div class="card p-0">
         <div class="p-6 pb-4 border-b border-gray-200 dark:border-dark-border flex items-center justify-between">
             <h3 class="text-xl font-semibold text-heading">Laporan Tahunan Order</h3>
-            <a href="{{ route('pa.orders.yearly.export', request()->query()) }}" class="btn b-solid btn-primary-solid">
+            <a href="{{ route('pa.orders.monthly.export', request()->query()) }}" class="btn b-solid btn-primary-solid">
                 <i class="ri-download-2-line mr-1"></i> Export PDF
             </a>
         </div>
 
         <div class="p-6">
-            <form method="GET" action="{{ route('pa.orders.yearly') }}"
-                class="w-full bg-white dark:bg-dark-card p-6 rounded-xl shadow-sm mb-6 border border-gray-200 dark:border-dark-border">
-                <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-                    <div>
-                        <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Filter Data</h2>
-                        <p class="text-sm text-gray-500 dark:text-gray-400">Gunakan filter untuk memilih tahun dan status
-                            order.</p>
+            <form method="GET" action="{{ route('pa.orders.monthly') }}"
+                class="w-full bg-white dark:bg-dark-card p-4 rounded-xl shadow-sm mb-4 border border-gray-200 dark:border-dark-border">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                    {{-- Status --}}
+                    <div class="space-y-1">
+                        <label class="block text-sm text-gray-700 dark:text-gray-300">Status</label>
+                        <select name="status" class="form-input form-select w-full h-11">
+                            <option value="">Semua</option>
+                            <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+                            <option value="paid" {{ request('status') == 'paid' ? 'selected' : '' }}>Paid</option>
+                            <option value="shipped" {{ request('status') == 'shipped' ? 'selected' : '' }}>Shipped</option>
+                            <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>Completed
+                            </option>
+                            <option value="cancelled" {{ request('status') == 'cancelled' ? 'selected' : '' }}>Cancelled
+                            </option>
+                        </select>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
-                        <div>
-                            <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Status Order</label>
-                            <select name="status" class="form-select w-full">
-                                <option value="">Semua</option>
-                                <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
-                                <option value="paid" {{ request('status') == 'paid' ? 'selected' : '' }}>Paid</option>
-                                <option value="shipped" {{ request('status') == 'shipped' ? 'selected' : '' }}>Shipped</option>
-                                <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>Completed</option>
-                                <option value="cancelled" {{ request('status') == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
-                            </select>
-                        </div>
 
-                        <div>
-                            <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Tahun</label>
-                            <input type="number" name="year" class="form-input w-full"
-                                value="{{ request('year', now()->year) }}">
-                        </div>
+                    {{-- Bulan --}}
+                    <div class="space-y-1">
+                        <label class="block text-sm text-gray-700 dark:text-gray-300">Bulan</label>
+                        <select name="month" class="form-input form-select w-full h-11">
+                            @foreach (range(1, 12) as $m)
+                                <option value="{{ $m }}"
+                                    {{ request('month', now()->month) == $m ? 'selected' : '' }}>
+                                    {{ DateTime::createFromFormat('!m', $m)->format('F') }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
 
-                        <div class="flex items-end">
-                            <button class="btn btn-primary w-full">Terapkan</button>
-                        </div>
+                    {{-- Tahun --}}
+                    <div class="space-y-1">
+                        <label class="block text-sm text-gray-700 dark:text-gray-300">Tahun</label>
+                        <input type="number" name="year" class="form-input form-input-sm w-full"
+                            value="{{ request('year', now()->year) }}">
+                    </div>
+
+                    {{-- Tombol --}}
+                    <div class="flex items-end">
+                        <button class="btn btn-sm btn-primary w-full">Terapkan</button>
                     </div>
                 </div>
             </form>
+
 
             {{-- Ringkasan --}}
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">

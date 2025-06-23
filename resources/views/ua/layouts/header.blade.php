@@ -3,13 +3,13 @@
         <div class="top-header">
             <div class="main_logo" id="logo">
                 <a href="index.html">
-                    <img src="https://media.licdn.com/dms/image/v2/C560BAQFTKewNnLUpOg/company-logo_200_200/company-logo_200_200/0/1630569480047/rose_brand_logo?e=2147483647&v=beta&t=jsy-GAf7KiuVGvAi6LgwaLkD568KF2OGkvL79yLQ0l4"
-                        style="width:60px; margin: auto;" alt="">
+                    <img src="{{ asset('user_access/images/logo_rosebrand.png') }}"
+                        style="width:120px; margin: auto;" alt="">
                 </a>
                 <a href="index.html">
                     <img class="logo-inverse"
-                        src="https://media.licdn.com/dms/image/v2/C560BAQFTKewNnLUpOg/company-logo_200_200/company-logo_200_200/0/1630569480047/rose_brand_logo?e=2147483647&v=beta&t=jsy-GAf7KiuVGvAi6LgwaLkD568KF2OGkvL79yLQ0l4"
-                        style="width:60px; margin: auto;" alt="">
+                        src="{{ asset('user_access/images/logo_rosebrand.png') }}"
+                        style="width:120px; margin: auto;" alt="">
                 </a>
             </div>
 
@@ -91,10 +91,7 @@
                                 <a class="nav-link active" aria-current="page" href="index.html">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="shop_grid.html">Semua Produk</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="contact_us.html">Kontak Kami</a>
+                                <a class="nav-link" href="{{ route('ua.products') }}">Semua Produk</a>
                             </li>
                         </ul>
                         <div class="d-block d-lg-none">

@@ -109,11 +109,14 @@ class PAOrderController extends Controller
     }
 
 
-    public function yearlyReport(Request $request)
+    public function monthlyReport(Request $request)
     {
         $year = $request->year ?? now()->year;
+        $month = $request->month ?? now()->month;
 
-        $query = Order::with('customer')->whereYear('ordered_at', $year);
+        $query = Order::with('customer')
+            ->whereYear('ordered_at', $year)
+            ->whereMonth('ordered_at', $month);
 
         if ($request->filled('status')) {
             $query->where('status', $request->status);
@@ -130,14 +133,17 @@ class PAOrderController extends Controller
             'cancelled' => $orders->where('status', 'cancelled')->count(),
         ];
 
-        return view('pa.orders.yearly', compact('orders', 'summary', 'year'));
+        return view('pa.orders.monthly', compact('orders', 'summary', 'year', 'month'));
     }
 
-    public function exportYearlyPdf(Request $request)
+    public function exportMonthlyPdf(Request $request)
     {
         $year = $request->year ?? now()->year;
+        $month = $request->month ?? now()->month;
 
-        $query = Order::with('customer')->whereYear('ordered_at', $year);
+        $query = Order::with('customer')
+            ->whereYear('ordered_at', $year)
+            ->whereMonth('ordered_at', $month);
 
         if ($request->filled('status')) {
             $query->where('status', $request->status);
@@ -154,9 +160,10 @@ class PAOrderController extends Controller
             'cancelled' => $orders->where('status', 'cancelled')->count(),
         ];
 
-        $pdf = PDF::loadView('pa.orders.yearly-pdf', compact('orders', 'summary', 'year'))->setPaper('a4', 'landscape');
+        $pdf = PDF::loadView('pa.orders.monthly-pdf', compact('orders', 'summary', 'year', 'month'))
+            ->setPaper('a4', 'landscape');
 
-        return $pdf->download("laporan-tahunan-{$year}.pdf");
+        return $pdf->download("laporan-bulanan-{$year}-{$month}.pdf");
     }
 
     public function show(Order $order)

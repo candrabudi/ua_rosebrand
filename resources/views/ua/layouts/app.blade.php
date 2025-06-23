@@ -74,6 +74,13 @@
             border-radius: 5px;
         }
     </style>
+    <style>
+        .wrapper {
+            /* Gradient: Biru langit super pucat ke abu-abu sangat terang */
+            background: linear-gradient(135deg, #e3f2fd 0%, #e8f0f7 100%);
+            min-height: 100vh;
+        }
+    </style>
 </head>
 
 <body>

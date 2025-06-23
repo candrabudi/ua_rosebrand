@@ -15,13 +15,13 @@
     <div
         class="px-4 h-header flex items-center shrink-0 group-data-[sidebar-size=sm]:px-2 group-data-[sidebar-size=sm]:justify-center">
         <a href="index.html" class="group-data-[sidebar-size=lg]:block hidden">
-            <img src="https://rosebrand.co.id/images/main/logo.png" alt="logo" class="group-[.dark]:hidden"
-                width="50">
-            <img src="https://rosebrand.co.id/images/main/logo.png" alt="logo" class="group-[.light]:hidden"
-                width="50">
+            <img src="{{ asset('user_access/images/logo_rosebrand.png') }}" alt="logo" class="group-[.dark]:hidden"
+                width="120">
+            <img src="{{ asset('user_access/images/logo_rosebrand.png') }}" alt="logo" class="group-[.light]:hidden"
+                width="120">
         </a>
         <a href="index.html" class="group-data-[sidebar-size=lg]:hidden block">
-            <img src="https://rosebrand.co.id/images/main/logo.png" alt="logo" width="30">
+            <img src="{{ asset('user_access/images/logo_rosebrand.png') }}" alt="logo" width="120">
         </a>
     </div>
     <div id="app-menu-scrollbar" data-scrollbar
@@ -144,7 +144,7 @@
                 </li>
                 <li
                     class="relative group/sm w-full group-data-[sidebar-size=sm]:hover:w-[calc(theme('spacing.app-menu-sm')_*_3.4)] group-data-[sidebar-size=sm]:flex-center">
-                    <a href="{{ route('pa.orders.yearly') }}" class="{{ $baseLinkClasses }}">
+                    <a href="{{ route('pa.orders.monthly') }}" class="{{ $baseLinkClasses }}">
                         <span
                             class="shrink-0 group-data-[sidebar-size=sm]:w-[calc(theme('spacing.app-menu-sm')_*_0.43)] group-data-[sidebar-size=sm]:flex-center">
                             <i class="ri-calendar-check-line group/menu-link:[&.active]:text-white"></i>

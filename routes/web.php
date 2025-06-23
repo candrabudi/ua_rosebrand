@@ -3,6 +3,7 @@
 use App\Http\Controllers\PA\PAAuthController;
 use App\Http\Controllers\PA\PABankController;
 use App\Http\Controllers\PA\PACategoryController;
+use App\Http\Controllers\PA\PACustomerController;
 use App\Http\Controllers\PA\PADashboardController;
 use App\Http\Controllers\PA\PAOrderController;
 use App\Http\Controllers\PA\PAProductController;
@@ -92,8 +93,8 @@ Route::middleware(['auth'])->prefix('pa')->name('pa.')->group(function () {
         Route::get('/history', [PAOrderController::class, 'history'])->name('history');
         Route::get('/daily', [PAOrderController::class, 'daily'])->name('daily');
         Route::get('/daily/export', [PAOrderController::class, 'exportDailyPdf'])->name('daily.export');
-        Route::get('/yearly', [PAOrderController::class, 'yearlyReport'])->name('yearly');
-        Route::get('/yearly/export-pdf', [PAOrderController::class, 'exportYearlyPdf'])->name('yearly.export');
+        Route::get('/monthly', [PAOrderController::class, 'monthlyReport'])->name('monthly');
+        Route::get('/monthly/export-pdf', [PAOrderController::class, 'exportMonthlyPdf'])->name('monthly.export');
         Route::get('/create', [PAOrderController::class, 'create'])->name('create');
         Route::post('/', [PAOrderController::class, 'store'])->name('store');
         Route::get('/{id}/edit', [PAOrderController::class, 'edit'])->name('edit');
@@ -110,5 +111,11 @@ Route::middleware(['auth'])->prefix('pa')->name('pa.')->group(function () {
         Route::put('/{bank}', [PABankController::class, 'update'])->name('update');
         Route::patch('/{bank}', [PABankController::class, 'update']);
         Route::delete('/{bank}', [PABankController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('customers')->name('customers.')->group(function () {
+        Route::get('/', [PACustomerController::class, 'index'])->name('index');
+        Route::get('/{id}', [PACustomerController::class, 'show'])->name('show');
+        Route::delete('/{customer}', [PACustomerController::class, 'destroy'])->name('destroy');
     });
 });

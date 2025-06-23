@@ -12,7 +12,6 @@
         </div>
         <!-- Header Right -->
         <div class="flex items-center gap-1 sm:gap-3">
-            <!-- Dark Light Button -->
             <button type="button"
                 class="themeMode size-8 flex-center hover:bg-gray-200 dark:hover:bg-gray-700 rounded-md"
                 onclick="toggleThemeMode()">
