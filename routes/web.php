@@ -7,6 +7,7 @@ use App\Http\Controllers\PA\PACustomerController;
 use App\Http\Controllers\PA\PADashboardController;
 use App\Http\Controllers\PA\PAOrderController;
 use App\Http\Controllers\PA\PAProductController;
+use App\Http\Controllers\PA\PAUserController;
 use App\Http\Controllers\UA\UAAddressController;
 use App\Http\Controllers\UA\UAAuthController;
 use App\Http\Controllers\UA\UACartController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\UA\UACheckoutController;
 use App\Http\Controllers\UA\UADashboardController;
 use App\Http\Controllers\UA\UAHomeController;
 use App\Http\Controllers\UA\UAOrderController;
+use App\Http\Controllers\UA\UAProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,6 +62,9 @@ Route::middleware(['auth'])->prefix('ua')->name('ua.')->group(function () {
         Route::get('/', [UACheckoutController::class, 'index'])->name('index');
         Route::post('/store', [UACheckoutController::class, 'store'])->name('store');
     });
+
+    Route::get('/profile', [UAProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile', [UAProfileController::class, 'update'])->name('profile.update');
 });
 
 Route::prefix('pa')->name('pa.')->group(function () {
@@ -104,6 +109,13 @@ Route::middleware(['auth'])->prefix('pa')->name('pa.')->group(function () {
         Route::get('/{order}', [PAOrderController::class, 'show'])->name('show');
     });
 
+    Route::prefix('report')->name('report.')->group(function () {
+        Route::get('/daily', [PAOrderController::class, 'daily'])->name('daily');
+        Route::get('/daily/export', [PAOrderController::class, 'exportDailyPdf'])->name('daily.export');
+        Route::get('/monthly', [PAOrderController::class, 'monthlyReport'])->name('monthly');
+        Route::get('/monthly/export-pdf', [PAOrderController::class, 'exportMonthlyPdf'])->name('monthly.export');
+    });
+
     Route::prefix('banks')->name('banks.')->group(function () {
         Route::get('/', [PABankController::class, 'index'])->name('index');
         Route::post('/', [PABankController::class, 'store'])->name('store');
@@ -117,5 +129,21 @@ Route::middleware(['auth'])->prefix('pa')->name('pa.')->group(function () {
         Route::get('/', [PACustomerController::class, 'index'])->name('index');
         Route::get('/{id}', [PACustomerController::class, 'show'])->name('show');
         Route::delete('/{customer}', [PACustomerController::class, 'destroy'])->name('destroy');
+    });
+
+
+    Route::prefix('users')->name('users.')->group(function () {
+        Route::get('/', [PAUserController::class, 'index'])->name('index');
+        Route::get('/create', [PAUserController::class, 'create'])->name('create');
+        Route::post('/store', [PAUserController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [PAUserController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [PAUserController::class, 'update'])->name('update');
+        Route::delete('/{id}', [PAUserController::class, 'destroy'])->name('destroy');
+    });
+
+
+    Route::prefix('account')->name('account.')->group(function () {
+        Route::get('/', [PAUserController::class, 'editProfile'])->name('edit');
+        Route::post('/', [PAUserController::class, 'updateProfile'])->name('update');
     });
 });

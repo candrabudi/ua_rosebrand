@@ -6,13 +6,13 @@
     <div class="card p-0">
         <div class="p-6 pb-4 border-b border-gray-200 dark:border-dark-border flex items-center justify-between">
             <h3 class="text-xl font-semibold text-heading">Laporan Tahunan Order</h3>
-            <a href="{{ route('pa.orders.monthly.export', request()->query()) }}" class="btn b-solid btn-primary-solid">
+            <a href="{{ route('pa.report.monthly.export', request()->query()) }}" class="btn b-solid btn-primary-solid">
                 <i class="ri-download-2-line mr-1"></i> Export PDF
             </a>
         </div>
 
         <div class="p-6">
-            <form method="GET" action="{{ route('pa.orders.monthly') }}"
+            <form method="GET" action="{{ route('pa.report.monthly') }}"
                 class="w-full bg-white dark:bg-dark-card p-4 rounded-xl shadow-sm mb-4 border border-gray-200 dark:border-dark-border">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
                     {{-- Status --}}

@@ -131,7 +131,7 @@
                 </li>
                 <li
                     class="relative group/sm w-full group-data-[sidebar-size=sm]:hover:w-[calc(theme('spacing.app-menu-sm')_*_3.4)] group-data-[sidebar-size=sm]:flex-center">
-                    <a href="{{ route('pa.orders.daily') }}" class="{{ $baseLinkClasses }}">
+                    <a href="{{ route('pa.report.daily') }}" class="{{ $baseLinkClasses }}">
                         <span
                             class="shrink-0 group-data-[sidebar-size=sm]:w-[calc(theme('spacing.app-menu-sm')_*_0.43)] group-data-[sidebar-size=sm]:flex-center">
                             <i class="ri-calendar-event-line group/menu-link:[&.active]:text-white"></i>
@@ -144,7 +144,7 @@
                 </li>
                 <li
                     class="relative group/sm w-full group-data-[sidebar-size=sm]:hover:w-[calc(theme('spacing.app-menu-sm')_*_3.4)] group-data-[sidebar-size=sm]:flex-center">
-                    <a href="{{ route('pa.orders.monthly') }}" class="{{ $baseLinkClasses }}">
+                    <a href="{{ route('pa.report.monthly') }}" class="{{ $baseLinkClasses }}">
                         <span
                             class="shrink-0 group-data-[sidebar-size=sm]:w-[calc(theme('spacing.app-menu-sm')_*_0.43)] group-data-[sidebar-size=sm]:flex-center">
                             <i class="ri-calendar-check-line group/menu-link:[&.active]:text-white"></i>
@@ -157,14 +157,27 @@
                 </li>
                 <li
                     class="relative group/sm w-full group-data-[sidebar-size=sm]:hover:w-[calc(theme('spacing.app-menu-sm')_*_3.4)] group-data-[sidebar-size=sm]:flex-center">
-                    <a href="#" class="{{ $baseLinkClasses }}">
+                    <a href="{{ route('pa.users.index') }}" class="{{ $baseLinkClasses }}">
+                        <span
+                            class="shrink-0 group-data-[sidebar-size=sm]:w-[calc(theme('spacing.app-menu-sm')_*_0.43)] group-data-[sidebar-size=sm]:flex-center">
+                            <i class="ri-group-line group/menu-link:[&.active]:text-white"></i>
+                        </span>
+                        <span
+                            class="group-data-[sidebar-size=sm]:hidden group-data-[sidebar-size=sm]:ml-6 group-data-[sidebar-size=sm]:group-hover/sm:block ml-3 shrink-0">
+                            Data Pengguna
+                        </span>
+                    </a>
+                </li>
+                <li
+                    class="relative group/sm w-full group-data-[sidebar-size=sm]:hover:w-[calc(theme('spacing.app-menu-sm')_*_3.4)] group-data-[sidebar-size=sm]:flex-center">
+                    <a href="{{ route('pa.account.edit') }}" class="{{ $baseLinkClasses }}">
                         <span
                             class="shrink-0 group-data-[sidebar-size=sm]:w-[calc(theme('spacing.app-menu-sm')_*_0.43)] group-data-[sidebar-size=sm]:flex-center">
                             <i class="ri-lock-line group/menu-link:[&.active]:text-white"></i>
                         </span>
                         <span
                             class="group-data-[sidebar-size=sm]:hidden group-data-[sidebar-size=sm]:ml-6 group-data-[sidebar-size=sm]:group-hover/sm:block ml-3 shrink-0">
-                            Ganti Password
+                            Akun Login
                         </span>
                     </a>
                 </li>

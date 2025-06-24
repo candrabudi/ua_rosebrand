@@ -124,7 +124,7 @@
                 @else
                     <div class="sub_header_right">
                         <div class="header_cart d-flex gap-2" style="margin-right: 20px">
-                            <a href="" class="btn btn-info text-white">Masuk</a>
+                            <a href="{{ route('ua.login') }}" class="btn btn-info text-white">Masuk</a>
                             <a href="{{ route('ua.register') }}" class="btn btn-warning text-white">Daftar</a>
                         </div>
                     </div>
