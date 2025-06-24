@@ -31,8 +31,8 @@
             </div>
 
             <div class="flex justify-end gap-2">
-                <a href="{{ route('pa.users.index') }}" class="btn-secondary">Batal</a>
-                <button type="submit" class="btn-primary">Simpan</button>
+                <a href="{{ route('pa.users.index') }}" class="btn b-light btn-disable-light">Batal</a>
+                <button type="submit" class="btn b-light btn-primary-light dk-theme-card-square">Simpan</button>
             </div>
         </form>
     </div>

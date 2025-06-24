@@ -5,7 +5,7 @@
         <div class="flex-center-between p-6 pb-4 border-b border-gray-200 dark:border-dark-border">
             <h3 class="text-lg card-title leading-none">Daftar Admin & Employee</h3>
             <div class="mt-4 flex justify-end">
-                <a href="{{ route('pa.users.create') }}" class="btn-primary inline-flex items-center gap-2">
+                <a href="{{ route('pa.users.create') }}" class="btn b-light btn-secondary-light">
                     <i class="ri-add-line"></i> Tambah User
                 </a>
             </div>
