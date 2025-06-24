@@ -14,7 +14,19 @@ class UAHomeController extends Controller
     {
         $topRosebrandProducts = Product::select('products.*', DB::raw('SUM(order_items.quantity) as total_sold'))
             ->join('order_items', 'products.id', '=', 'order_items.product_id')
-            ->groupBy('products.id', 'products.category_id', 'products.name', 'products.slug', 'products.description')
+            ->groupBy(
+                'products.id',
+                'products.category_id',
+                'products.name',
+                'products.slug',
+                'products.description',
+                'products.packaging',
+                'products.quantity',
+                'products.price',
+                'products.image',
+                'products.unit_name',
+                'products.form_type',
+            )
             ->orderByDesc('total_sold')
             ->take(8)
             ->get();
