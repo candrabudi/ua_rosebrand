@@ -103,7 +103,7 @@
                                     @else
                                         <div class="alert alert-warning mb-0">
                                             Tidak ada alamat utama yang tersimpan. <a
-                                                href="{{ route('user.address.index') }}" class="alert-link">Tambah
+                                                href="{{ route('ua.address.index') }}" class="alert-link">Tambah
                                                 sekarang</a>.
                                         </div>
                                     @endif
