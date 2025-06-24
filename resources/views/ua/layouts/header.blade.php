@@ -18,7 +18,7 @@
                     <input class="prompt srch10" type="text" name="search" value="{{ request('search') }}"
                         placeholder="Search for products..">
                     <button type="submit" class="btn position-absolute"
-                        style="right: 10px; top: 50%; transform: translateY(-50%); border: none; background: transparent;">
+                        style="right: 10px; top: 10%; transform: translateY(-50%); border: none; background: transparent;">
                         <i class="uil uil-search s-icon"></i>
                     </button>
                 </form>
