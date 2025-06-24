@@ -26,6 +26,8 @@ class UAHomeController extends Controller
                 'products.image',
                 'products.unit_name',
                 'products.form_type',
+                'products.created_at',
+                'products.updated_at',
             )
             ->orderByDesc('total_sold')
             ->take(8)
