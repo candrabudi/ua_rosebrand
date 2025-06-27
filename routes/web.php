@@ -42,6 +42,7 @@ Route::post('/logout', [UAAuthController::class, 'logout'])->name('logout');
 
 
 Route::post('/ua/cart/add', [UACartController::class, 'addToCart'])->name('ua.cart.add');
+Route::post('/ua/cart/update', [UACartController::class, 'updateQuantity']);
 Route::get('/ua/cart/count', [UACartController::class, 'cartCount']);
 Route::get('/ua/cart/list', [UACartController::class, 'getCartItems']);
 Route::delete('/ua/cart/delete/{id}', [UACartController::class, 'deleteItem'])->middleware('auth');

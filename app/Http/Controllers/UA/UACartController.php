@@ -22,15 +22,54 @@ class UACartController extends Controller
             return response()->json(['success' => false, 'message' => 'Customer not found'], 403);
         }
 
-        Cart::updateOrCreate(
-            ['customer_id' => $customer->id, 'product_id' => $request->product_id],
-            ['quantity' => DB::raw("quantity + {$request->quantity}")]
-        );
+        $cartItem = Cart::where('customer_id', $customer->id)
+            ->where('product_id', $request->product_id)
+            ->first();
+
+        if ($cartItem) {
+            // Jika produk sudah ada, tambahkan quantity
+            $cartItem->quantity += $request->quantity;
+            $cartItem->save();
+        } else {
+            // Jika belum ada, buat entri baru
+            Cart::create([
+                'customer_id' => $customer->id,
+                'product_id' => $request->product_id,
+                'quantity' => $request->quantity,
+            ]);
+        }
 
         return response()->json([
             'success' => true,
+            'message' => 'Product added to cart successfully',
         ]);
     }
+
+
+    public function updateQuantity(Request $request)
+    {
+        $request->validate([
+            'cart_id' => 'required|exists:carts,id',
+            'quantity' => 'required|integer|min:1',
+        ]);
+
+        $customer = Auth::user()->customer;
+        if (!$customer) {
+            return response()->json(['success' => false, 'message' => 'Unauthorized'], 403);
+        }
+
+        $cart = Cart::where('id', $request->cart_id)->where('customer_id', $customer->id)->first();
+
+        if (!$cart) {
+            return response()->json(['success' => false, 'message' => 'Item not found'], 404);
+        }
+
+        $cart->quantity = $request->quantity;
+        $cart->save();
+
+        return response()->json(['success' => true]);
+    }
+
 
     public function cartCount()
     {
