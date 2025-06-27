@@ -255,7 +255,7 @@
                                                 <input type="number" value="${item.quantity}" class="input-text qty text">
                                                 <input type="button" value="+" class="plus plus-btn">
                                             </div>
-                                            <div class="cart-item-price">${formatRupiah(item.price)}</div>
+                                            <div class="cart-item-price">${formatRupiah(item.subtotal)}</div>
                                         </div>
                                     </div>
                                     <button type="button" class="cart-close-btn ms-2" data-id="${item.id}" title="Hapus item">
