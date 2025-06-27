@@ -80,7 +80,7 @@
 
                                 </div>
                                 <div class="signup-link">
-                                    <p>Apakah kamu punya akun ? - <a href="sign_in.html">Masuk Sekarang</a></p>
+                                    <p>Apakah kamu punya akun ? - <a href="{{ route('ua.login') }}">Masuk Sekarang</a></p>
                                 </div>
                             </div>
                         </div>
