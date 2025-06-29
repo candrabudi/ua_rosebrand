@@ -30,9 +30,6 @@
                     icon="ri-check-double-line" />
                 <x-dashboard-card title="Transaksi Gagal" :value="$failedOrders" chartId="fail-chart"
                     icon="ri-close-circle-line" />
-                <x-dashboard-card title="Rata-rata Order per Hari" :value="$averageOrderPerDay" chartId="avg-order-chart"
-                    icon="ri-bar-chart-grouped-line" />
-
             </div>
         </div>
     </div>
