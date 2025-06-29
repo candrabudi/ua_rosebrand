@@ -70,6 +70,6 @@ class UACheckoutController extends Controller
 
         Cart::where('customer_id', $customer->id)->delete();
 
-        return redirect()->route('ua.orders.success', $order->id)->with('success', 'Pesanan berhasil dibuat.');
+        return redirect()->route('ua.orders.index', $order->id)->with('success', 'Pesanan berhasil dibuat.');
     }
 }
