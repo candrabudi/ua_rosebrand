@@ -24,7 +24,7 @@
                 <x-dashboard-card title="Total Customer" :value="$totalCustomers" chartId="customer-chart" icon="ri-user-line" />
                 <x-dashboard-card title="Total Order" :value="$totalOrders" chartId="order-chart" icon="ri-shopping-bag-line" />
 
-                <x-dashboard-card title="Total Keuntungan" :value="'Rp ' . number_format($totalProfit, 0, ',', '.')" chartId="profit-chart"
+                <x-dashboard-card title="Total Omset" :value="'Rp ' . number_format($totalProfit, 0, ',', '.')" chartId="profit-chart"
                     icon="ri-money-dollar-circle-line" />
                 <x-dashboard-card title="Transaksi Sukses" :value="$successfulOrders" chartId="success-chart"
                     icon="ri-check-double-line" />
