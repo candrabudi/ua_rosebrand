@@ -50,20 +50,27 @@
                                     @php
                                         $badgeClasses = [
                                             'pending' => 'badge badge-warning-light',
-                                            'accepted' => 'badge badge-primary-light',
-                                            'processing' => 'badge badge-info-light',
                                             'paid' => 'badge badge-success-light',
                                             'shipped' => 'badge badge-secondary-light',
                                             'completed' => 'badge badge-success-light',
                                             'cancelled' => 'badge badge-danger-light',
                                             'default' => 'badge badge-disable-light',
                                         ];
+
+                                        $statusTranslations = [
+                                            'pending' => 'Menunggu Konfirmasi',
+                                            'paid' => 'Sudah Dibayar',
+                                            'shipped' => 'Sedang Dikirim',
+                                            'completed' => 'Selesai',
+                                            'cancelled' => 'Dibatalkan',
+                                        ];
                                     @endphp
                                     <span class="capitalize {{ $badgeClasses[$order->status] ?? $badgeClasses['default'] }}"
                                         id="order-status-{{ $order->id }}">
-                                        {{ ucfirst($order->status) }}
+                                        {{ $statusTranslations[$order->status] ?? ucfirst($order->status) }}
                                     </span>
                                 </td>
+
                                 <td class="p-6 py-4 text-gray-600 dark:text-gray-400">
                                     {{ $order->created_at->format('d M Y H:i') }}
                                 </td>

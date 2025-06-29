@@ -25,19 +25,30 @@
                             <span class="font-medium text-gray-800 dark:text-gray-200">Status Order:</span>
                             <span
                                 class="capitalize
-                                {{ $order->status === 'pending'
-                                    ? 'badge badge-warning-light'
-                                    : ($order->status === 'paid'
-                                        ? 'badge badge-success-light'
-                                        : ($order->status === 'shipped'
-                                            ? 'badge badge-info-light'
-                                            : ($order->status === 'completed'
-                                                ? 'badge badge-primary-light'
-                                                : ($order->status === 'cancelled'
-                                                    ? 'badge badge-danger-light'
-                                                    : 'badge badge-disable-light')))) }}">
-                                {{ ucfirst($order->status) }}
+                                    {{ $order->status === 'pending'
+                                        ? 'badge badge-warning-light'
+                                        : ($order->status === 'paid'
+                                            ? 'badge badge-success-light'
+                                            : ($order->status === 'shipped'
+                                                ? 'badge badge-info-light'
+                                                : ($order->status === 'completed'
+                                                    ? 'badge badge-primary-light'
+                                                    : ($order->status === 'cancelled'
+                                                        ? 'badge badge-danger-light'
+                                                        : 'badge badge-disable-light')))) }}">
+                                                                {{ $order->status === 'pending'
+                                                                    ? 'Menunggu Pembayaran'
+                                                                    : ($order->status === 'paid'
+                                                                        ? 'Sudah Dibayar'
+                                                                        : ($order->status === 'shipped'
+                                                                            ? 'Sedang Dikirim'
+                                                                            : ($order->status === 'completed'
+                                                                                ? 'Selesai'
+                                                                                : ($order->status === 'cancelled'
+                                                                                    ? 'Dibatalkan'
+                                                                                    : ucfirst($order->status))))) }}
                             </span>
+
                         </p>
                         <p class="flex justify-between items-center">
                             <span class="font-medium text-gray-800 dark:text-gray-200">Metode Pembayaran:</span>
@@ -190,10 +201,10 @@
                                 @endif
                             </p>
                         @endif
-                        @if ($order->payment->method === 'transfer')
+                        @if ($order->payment->method === 'transfer' && $order->payment->paid_at)
                             <p class="flex justify-between col-span-full md:col-span-1">
                                 <span class="font-medium text-gray-800 dark:text-gray-200">Status Pembayaran:</span>
-                                @if ($order->status === 'paid')
+                                @if ($order->payment->paid_at)
                                     <span class="badge badge-success-light font-semibold">Sudah Dibayar</span>
                                 @else
                                     <span class="badge badge-warning-light font-semibold">Menunggu Konfirmasi
@@ -245,7 +256,7 @@
             @endif
 
             @if (!in_array($order->status, ['completed', 'cancelled', 'shipped']))
-                <button type="button" class="btn btn-outline-danger ml-2 action-btn" data-action="rejected"
+                <button type="button" class="btn btn-outline-danger ml-2 action-btn" data-action="cancelled"
                     data-order-id="{{ $order->id }}">
                     <i class="ri-close-circle-line mr-1"></i> Batalkan Order
                 </button>
@@ -330,7 +341,7 @@
                             icon = 'info';
                             confirmButtonColor = '#28a745';
                             break;
-                        case 'rejected':
+                        case 'cancelled':
                             title = 'Batalkan Order';
                             text =
                                 `Apakah Anda yakin ingin membatalkan Order #${orderId}? Aksi ini tidak dapat dibatalkan.`;

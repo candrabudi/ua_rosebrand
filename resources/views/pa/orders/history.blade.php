@@ -30,7 +30,8 @@
                                     <span class="absolute top-1/2 -translate-y-[40%] left-2.5">
                                         <i class="ri-search-line text-gray-900 dark:text-dark-text text-[14px]"></i>
                                     </span>
-                                    <input type="search" name="search" placeholder="Search..." value="{{request('search')}}" class="form-input pl-8">
+                                    <input type="search" name="search" placeholder="Search..."
+                                        value="{{ request('search') }}" class="form-input pl-8">
                                 </div>
                             </div>
                         </div>
@@ -61,7 +62,9 @@
 
                         {{-- Filter Button --}}
                         <div class="flex items-end">
-                            <button type="submit" class="btn b-light btn-primary-light dk-theme-card-square w-full h-10">Terapkan Filter</button>
+                            <button type="submit"
+                                class="btn b-light btn-primary-light dk-theme-card-square w-full h-10">Terapkan
+                                Filter</button>
                         </div>
                     </div>
                 </div>
@@ -87,6 +90,15 @@
                                 <td class="p-4">{{ $i + 1 + ($orders->currentPage() - 1) * $orders->perPage() }}</td>
                                 <td class="p-4">{{ $order->customer->full_name }}</td>
                                 <td class="p-4 capitalize">
+                                    @php
+                                        $statusTranslations = [
+                                            'pending' => 'Menunggu Pembayaran',
+                                            'paid' => 'Sudah Dibayar',
+                                            'shipped' => 'Sedang Dikirim',
+                                            'completed' => 'Selesai',
+                                            'cancelled' => 'Dibatalkan',
+                                        ];
+                                    @endphp
                                     <span
                                         class="badge {{ match ($order->status) {
                                             'pending' => 'badge-warning-light',
@@ -96,9 +108,10 @@
                                             'cancelled' => 'badge-danger-light',
                                             default => 'badge-disable-light',
                                         } }}">
-                                        {{ $order->status }}
+                                        {{ $statusTranslations[$order->status] ?? ucfirst($order->status) }}
                                     </span>
                                 </td>
+
                                 <td class="p-4">{{ $order->ordered_at->format('d M Y H:i') }}</td>
                                 <td class="p-4 font-semibold">Rp {{ number_format($order->total_price, 0, ',', '.') }}</td>
                                 <td class="p-4 uppercase">{{ $order->payment_method }}</td>
