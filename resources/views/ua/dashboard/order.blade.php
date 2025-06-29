@@ -64,19 +64,35 @@
 
                             @forelse ($orders as $order)
                                 <div class="bg-white rounded-4 shadow-sm mb-5 p-4 p-md-5">
-                                    <div class="d-flex justify-content-between flex-wrap mb-4 border-bottom pb-3">
-                                        <div>
-                                            <h5 class="mb-1">Pesanan #{{ $order->id }}</h5>
-                                            <small class="text-muted">Waktu Pemesanan:
-                                                {{ Carbon::parse($order->ordered_at)->format('d M Y, H:i') }}</small>
-                                        </div>
-                                        <div class="text-end mt-2 mt-md-0">
-                                            <span
-                                                class="badge bg-warning text-dark px-3 py-2">{{ ucfirst($order->status) }}</span><br>
-                                            <small class="text-muted">Metode:
-                                                <strong>{{ strtoupper($order->payment_method) }}</strong></small>
-                                        </div>
-                                    </div>
+                                   @php
+    $statusTranslations = [
+        'pending' => 'Menunggu Pembayaran',
+        'paid' => 'Sudah Dibayar',
+        'shipped' => 'Sedang Dikirim',
+        'completed' => 'Selesai',
+        'cancelled' => 'Dibatalkan',
+    ];
+
+    $translatedStatus = $statusTranslations[$order->status] ?? ucfirst($order->status);
+@endphp
+
+<div class="d-flex justify-content-between flex-wrap mb-4 border-bottom pb-3">
+    <div>
+        <h5 class="mb-1">Pesanan #{{ $order->id }}</h5>
+        <small class="text-muted">
+            Waktu Pemesanan: {{ \Carbon\Carbon::parse($order->ordered_at)->format('d M Y, H:i') }}
+        </small>
+    </div>
+    <div class="text-end mt-2 mt-md-0">
+        <span class="badge bg-warning text-dark px-3 py-2">
+            {{ $translatedStatus }}
+        </span><br>
+        <small class="text-muted">
+            Metode Pembayaran: <strong>{{ strtoupper($order->payment_method) }}</strong>
+        </small>
+    </div>
+</div>
+
 
                                     <div class="mb-4">
                                         <h6 class="fw-bold">Dikirim ke:</h6>

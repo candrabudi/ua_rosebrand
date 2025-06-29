@@ -189,7 +189,7 @@ class PAOrderController extends Controller
         if (!$order) {
             return response()->json([
                 'success' => false,
-                'message' => 'Order tidak ditemukan.',
+                'message' => 'Pesanan tidak ditemukan.',
             ], 404);
         }
 
@@ -204,13 +204,25 @@ class PAOrderController extends Controller
             }
         }
 
+        $statusTranslations = [
+            'pending' => 'Menunggu Pembayaran',
+            'paid' => 'Sudah Dibayar',
+            'shipped' => 'Sedang Dikirim',
+            'completed' => 'Selesai',
+            'cancelled' => 'Dibatalkan',
+        ];
+
+        $translatedStatus = $statusTranslations[$order->status] ?? ucfirst($order->status);
+
         return response()->json([
             'success' => true,
-            'message' => "Status order #{$order->id} berhasil diperbarui menjadi '{$order->status}'.",
+            'message' => "Status pesanan #{$order->id} berhasil diperbarui menjadi '{$translatedStatus}'.",
             'order_id' => $order->id,
             'new_status' => $order->status,
+            'status_label' => $translatedStatus,
         ]);
     }
+
 
 
 
