@@ -157,8 +157,8 @@
                                 <span>Rp{{ number_format($total, 0, ',', '.') }}</span>
                             </div>
 
-                            <div class="payment-secure clickable-submit">
-                                <i class="uil uil-padlock"></i> Pembayaran aman & terenkripsi
+                            <div class="payment-secure cart-checkout-btn hover-btn clickable-submit" style="width: 100%; text-align: center; color: #fff; cursor: pointer;">
+                                <i class="uil uil-padlock"></i> Checkout Sekarang
                             </div>
                             <script>
                                 document.querySelector('.clickable-submit').addEventListener('click', function() {
