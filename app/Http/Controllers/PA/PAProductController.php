@@ -85,10 +85,8 @@ class PAProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'brand' => 'nullable|string|max:100',
-            'packaging' => 'nullable|string|max:100',
             'price' => 'required|numeric|min:0',
             'unit_name' => 'required|string|max:50',
-            'form_type' => 'required|string|max:50',
             'category_id' => 'nullable|exists:categories,id',
             'image' => 'nullable|image|max:2048',
         ]);

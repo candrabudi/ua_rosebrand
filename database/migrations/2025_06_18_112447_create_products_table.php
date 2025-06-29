@@ -15,14 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
             $table->string('name');
-            $table->string('slug');
             $table->text('description')->nullable();
-            $table->string('packaging')->nullable();
             $table->integer('quantity')->default(1);
             $table->decimal('price', 12, 2);
             $table->string('image')->nullable();
             $table->string('unit_name');
-            $table->string('form_type');
             $table->timestamps();
         });
     }

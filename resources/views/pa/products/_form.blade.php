@@ -60,14 +60,6 @@
                     class="form-input" placeholder="Contoh: Indofarma, Kimia Farma">
             </div>
 
-            {{-- Kemasan --}}
-            <div class="col-span-full md:col-auto leading-none">
-                <label for="packaging" class="form-label mb-2">Kemasan</label>
-                <input type="text" id="packaging" name="packaging"
-                    value="{{ old('packaging', $product->packaging ?? '') }}" class="form-input"
-                    placeholder="Contoh: Botol, Strip, Blister">
-            </div>
-
             {{-- Jumlah/Box --}}
             <div class="col-span-full md:col-auto leading-none">
                 <label for="quantity_per_box" class="form-label mb-2">Jumlah/Box <span
@@ -99,14 +91,6 @@
                 <input type="text" id="unit_name" name="unit_name"
                     value="{{ old('unit_name', $product->unit_name ?? '') }}" class="form-input"
                     placeholder="Contoh: Tablet, Kapsul, ml">
-            </div>
-
-            {{-- Jenis Form --}}
-            <div class="col-span-full md:col-auto leading-none">
-                <label for="form_type" class="form-label mb-2">Jenis Form</label>
-                <input type="text" id="form_type" name="form_type"
-                    value="{{ old('form_type', $product->form_type ?? '') }}" class="form-input"
-                    placeholder="Contoh: Padat, Cair, Gel">
             </div>
         </div> {{-- End of Main Grid for 2 columns --}}
 
