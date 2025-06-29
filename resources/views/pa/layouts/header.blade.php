@@ -31,7 +31,7 @@
                 <div id="dropdownProfile"
                     class="invisible z-backdrop bg-white text-left divide-y divide-gray-100 rounded-lg shadow w-48 dark:bg-dark-card-shade dark:divide-dark-border-four">
                     <div class="px-4 py-3 text-sm text-gray-500 dark:text-white">
-                        <div class="font-medium ">Alex Janson</div>
+                        <div class="font-medium ">{{ Auth::user()->username }}</div>
                     </div>
                     <div class="py-2">
                         <a href="#"
