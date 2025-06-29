@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained()->onDelete('cascade');
-            $table->foreignId('bank_id')->nullable()->constrained()->nullOnDelete(); // hanya untuk transfer
+            $table->foreignId('bank_id')->nullable()->constrained()->nullOnDelete();
             $table->enum('method', ['cod', 'transfer']);
-            $table->string('proof')->nullable(); // bukti transfer
+            $table->string('proof')->nullable();
             $table->timestamp('paid_at')->nullable();
             $table->timestamps();
         });

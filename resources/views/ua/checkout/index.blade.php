@@ -21,13 +21,14 @@
         </div>
     </div>
 
-    <form action="{{ route('ua.checkout.store') }}" method="POST">
+    <form action="{{ route('ua.checkout.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="checkout-step">
             <div class="container">
                 <div class="row">
-                    <!-- Left Column -->
+                    <!-- LEFT COLUMN -->
                     <div class="col-lg-8">
+                        {{-- Delivery Address --}}
                         <div class="card p-4 mb-4">
                             <h4>Delivery Address</h4>
                             <div class="address-body">
@@ -58,6 +59,7 @@
                             </div>
                         </div>
 
+                        {{-- Payment Method --}}
                         <div class="card p-4">
                             <h4>Payment Method</h4>
                             <div class="payment-method">
@@ -90,12 +92,22 @@
                                             </label>
                                         </div>
                                     @endforeach
+
+                                    <div class="mt-3">
+                                        <label for="proof" class="form-label">Upload Bukti Transfer</label>
+                                        <input type="file" name="proof" id="proof" class="form-control"
+                                            accept="image/*">
+                                        <small class="text-muted">Format JPG/PNG maks. 2MB.</small>
+                                        @error('proof')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Right Column -->
+                    <!-- RIGHT COLUMN -->
                     <div class="col-lg-4 col-md-5">
                         <div class="pdpt-bg mt-0">
                             <div class="pdpt-title">
@@ -104,7 +116,6 @@
                             <div class="right-cart-dt-body">
                                 @php
                                     $total = 0;
-                                    $totalSaving = 0;
                                 @endphp
                                 @foreach ($cartItems as $item)
                                     @php
@@ -113,27 +124,17 @@
                                         $originalPrice = $product->original_price ?? $price;
                                         $qty = $item->quantity;
                                         $subtotal = $price * $qty;
-                                        $saving = ($originalPrice - $price) * $qty;
                                         $total += $subtotal;
-                                        $totalSaving += $saving;
                                     @endphp
                                     <div class="cart-item border_radius">
                                         <div class="cart-product-img">
                                             <img src="{{ asset('storage/' . $product->image) }}" alt="">
-                                            @if ($originalPrice > $price)
-                                                <div class="offer-badge">
-                                                    {{ round((($originalPrice - $price) / $originalPrice) * 100) }}%
-                                                    OFF
-                                                </div>
-                                            @endif
                                         </div>
                                         <div class="cart-text">
                                             <h4>{{ $product->name }}</h4>
                                             <div class="cart-item-price">
-                                                Rp{{ number_format($price, 0, ',', '.') }}
-                                                @if ($originalPrice > $price)
-                                                    <span>Rp{{ number_format($originalPrice, 0, ',', '.') }}</span>
-                                                @endif
+                                                Rp{{ number_format($price, 0, ',', '.') }} x {{ $qty }} (Rp{{ number_format($subtotal, 0, ',', '.') }})
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -151,13 +152,13 @@
                                 </div>
                             </div>
 
-
                             <div class="main-total-cart p-4">
                                 <h2>Total</h2>
                                 <span>Rp{{ number_format($total, 0, ',', '.') }}</span>
                             </div>
 
-                            <div class="payment-secure cart-checkout-btn hover-btn clickable-submit" style="width: 100%; text-align: center; color: #fff; cursor: pointer;">
+                            <div class="payment-secure cart-checkout-btn hover-btn clickable-submit"
+                                style="width: 100%; text-align: center; color: #fff; cursor: pointer;">
                                 <i class="uil uil-padlock"></i> Checkout Sekarang
                             </div>
                             <script>
@@ -165,15 +166,14 @@
                                     this.closest('form').submit();
                                 });
                             </script>
-
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </form>
 
+    {{-- Script untuk toggle input transfer --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const cod = document.getElementById('cod');

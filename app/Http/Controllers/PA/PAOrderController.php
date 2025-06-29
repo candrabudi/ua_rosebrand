@@ -50,7 +50,7 @@ class PAOrderController extends Controller
             'orderItems:id,order_id,product_id,price,quantity',
             'orderItems.product:id,name,unit_name'
         ])
-            ->where('status', 'pending')
+            ->whereIn('status', ['pending', 'paid'])
             ->latest()
             ->paginate(10);
 
@@ -195,6 +195,14 @@ class PAOrderController extends Controller
 
         $order->status = $request->action;
         $order->save();
+
+        if ($request->action == 'paid') {
+            $payment = Payment::where('order_id', $order->id)->first();
+            if ($payment && $payment->method === 'transfer') {
+                $payment->paid_at = now();
+                $payment->save();
+            }
+        }
 
         return response()->json([
             'success' => true,

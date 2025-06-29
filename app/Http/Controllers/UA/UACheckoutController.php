@@ -28,14 +28,14 @@ class UACheckoutController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'address_id' => 'required|exists:customer_addresses,id',
+            'address_id'     => 'required|exists:customer_addresses,id',
             'payment_method' => 'required|in:cod,transfer',
-            'bank_id' => 'required_if:payment_method,transfer|nullable|exists:banks,id',
+            'bank_id'        => 'required_if:payment_method,transfer|nullable|exists:banks,id',
+            'proof'          => 'required_if:payment_method,transfer|nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         $user = Auth::user();
         $customer = Customer::where('user_id', $user->id)->firstOrFail();
-
         $cartItems = Cart::with('product')->where('customer_id', $customer->id)->get();
 
         if ($cartItems->isEmpty()) {
@@ -62,14 +62,20 @@ class UACheckoutController extends Controller
             ]);
         }
 
+        $proofPath = null;
+        if ($request->payment_method === 'transfer' && $request->hasFile('proof')) {
+            $proofPath = $request->file('proof')->store('proofs', 'public');
+        }
+
         $order->payment()->create([
             'bank_id' => $request->payment_method === 'transfer' ? $request->bank_id : null,
             'method'  => $request->payment_method,
+            'proof'   => $proofPath,
             'paid_at' => $request->payment_method === 'cod' ? now() : null,
         ]);
 
         Cart::where('customer_id', $customer->id)->delete();
 
-        return redirect()->route('ua.orders.index', $order->id)->with('success', 'Pesanan berhasil dibuat.');
+        return redirect()->route('ua.orders.index')->with('success', 'Pesanan berhasil dibuat.');
     }
 }

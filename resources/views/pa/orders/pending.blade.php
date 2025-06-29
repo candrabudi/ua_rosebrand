@@ -84,7 +84,7 @@
                                             </div>
                                         @endif
 
-                                        @if ($order->payment && $order->payment->paid_at)
+                                        @if ($order->payment && $order->payment->paid_at && $order->payment_method === 'transfer')
                                             <div class="text-sm text-green-500 mt-1">
                                                 Dibayar pada:
                                                 {{ \Carbon\Carbon::parse($order->payment->paid_at)->format('d M Y H:i') }}

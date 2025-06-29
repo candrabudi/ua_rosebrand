@@ -190,14 +190,17 @@
                                 @endif
                             </p>
                         @endif
-                        <p class="flex justify-between col-span-full md:col-span-1">
-                            <span class="font-medium text-gray-800 dark:text-gray-200">Status Pembayaran:</span>
-                            @if ($order->payment->paid_at)
-                                <span class="badge badge-success-light font-semibold">Sudah Dibayar</span>
-                            @else
-                                <span class="badge badge-warning-light font-semibold">Menunggu Pembayaran</span>
-                            @endif
-                        </p>
+                        @if ($order->payment->method === 'transfer')
+                            <p class="flex justify-between col-span-full md:col-span-1">
+                                <span class="font-medium text-gray-800 dark:text-gray-200">Status Pembayaran:</span>
+                                @if ($order->status === 'paid')
+                                    <span class="badge badge-success-light font-semibold">Sudah Dibayar</span>
+                                @else
+                                    <span class="badge badge-warning-light font-semibold">Menunggu Konfirmasi
+                                        Pembayaran</span>
+                                @endif
+                            </p>
+                        @endif
                         <p class="flex justify-between col-span-full md:col-span-1">
                             <span class="font-medium text-gray-800 dark:text-gray-200">Tanggal Pembayaran:</span>
                             <span
@@ -224,7 +227,9 @@
         </div>
 
         <div class="card p-6 mt-6 text-right">
-            @if (($order->status === 'pending' && $order->payment_method === 'cod') || ($order->status === 'paid' && $order->payment_method === 'transfer'))
+            @if (
+                ($order->status === 'pending' && $order->payment_method === 'cod') ||
+                    ($order->status === 'paid' && $order->payment_method === 'transfer'))
                 <button type="button" class="btn btn-primary action-btn" data-action="shipped"
                     data-order-id="{{ $order->id }}">
                     <i class="ri-truck-line mr-1"></i> Kirim Order
@@ -233,11 +238,6 @@
                 <button type="button" class="btn btn-success action-btn" data-action="completed"
                     data-order-id="{{ $order->id }}">
                     <i class="ri-check-double-line mr-1"></i> Selesaikan Order
-                </button>
-            @elseif ($order->status === 'pending' && $order->payment_method === 'transfer')
-                <button type="button" class="btn btn-success action-btn" data-action="paid"
-                    data-order-id="{{ $order->id }}">
-                    <i class="ri-check-line mr-1"></i> Konfirmasi Pembayaran
                 </button>
             @else
                 <span class="text-gray-500 text-sm">Tidak ada aksi pengiriman/penyelesaian yang tersedia pada status
@@ -311,8 +311,8 @@
                     const action = this.dataset.action;
                     let title = '';
                     let text = '';
-                    let icon = 'question'; 
-                    let confirmButtonColor = '#3085d6'; 
+                    let icon = 'question';
+                    let confirmButtonColor = '#3085d6';
                     switch (action) {
                         case 'pending':
                             title = 'Konfirmasi Pembayaran';
@@ -334,8 +334,8 @@
                             title = 'Batalkan Order';
                             text =
                                 `Apakah Anda yakin ingin membatalkan Order #${orderId}? Aksi ini tidak dapat dibatalkan.`;
-                            icon = 'warning'; 
-                            confirmButtonColor = '#dc3545'; 
+                            icon = 'warning';
+                            confirmButtonColor = '#dc3545';
                             break;
                         default:
                             title = 'Konfirmasi Aksi';
@@ -354,7 +354,7 @@
                         cancelButtonText: 'Batal'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            performAction(orderId, action); 
+                            performAction(orderId, action);
                         }
                     });
                 });
