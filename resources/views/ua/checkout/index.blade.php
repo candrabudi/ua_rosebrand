@@ -26,11 +26,9 @@
         <div class="checkout-step">
             <div class="container">
                 <div class="row">
-                    <!-- LEFT COLUMN -->
                     <div class="col-lg-8">
-                        {{-- Delivery Address --}}
                         <div class="card p-4 mb-4">
-                            <h4>Delivery Address</h4>
+                            <h4>Alamat Penerima</h4>
                             <div class="address-body">
                                 @foreach ($addresses as $address)
                                     <div
@@ -59,9 +57,8 @@
                             </div>
                         </div>
 
-                        {{-- Payment Method --}}
                         <div class="card p-4">
-                            <h4>Payment Method</h4>
+                            <h4>Metode Pembayaran</h4>
                             <div class="payment-method">
                                 <div class="form-check mb-2">
                                     <input class="form-check-input" type="radio" name="payment_method" value="cod"
@@ -107,7 +104,6 @@
                         </div>
                     </div>
 
-                    <!-- RIGHT COLUMN -->
                     <div class="col-lg-4 col-md-5">
                         <div class="pdpt-bg mt-0">
                             <div class="pdpt-title">
@@ -173,7 +169,6 @@
         </div>
     </form>
 
-    {{-- Script untuk toggle input transfer --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const cod = document.getElementById('cod');

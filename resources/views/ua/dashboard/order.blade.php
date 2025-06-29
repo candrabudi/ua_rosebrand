@@ -64,35 +64,46 @@
 
                             @forelse ($orders as $order)
                                 <div class="bg-white rounded-4 shadow-sm mb-5 p-4 p-md-5">
-                                   @php
-    $statusTranslations = [
-        'pending' => 'Menunggu Pembayaran',
-        'paid' => 'Sudah Dibayar',
-        'shipped' => 'Sedang Dikirim',
-        'completed' => 'Selesai',
-        'cancelled' => 'Dibatalkan',
-    ];
+                                    @php
+                                        // Peta warna badge berdasarkan status
+                                        $badgeClasses = [
+                                            'pending' => 'badge bg-warning text-dark px-3 py-2',
+                                            'paid' => 'badge bg-success text-white px-3 py-2',
+                                            'shipped' => 'badge bg-secondary text-white px-3 py-2',
+                                            'completed' => 'badge bg-primary text-white px-3 py-2',
+                                            'cancelled' => 'badge bg-danger text-white px-3 py-2',
+                                            'default' => 'badge bg-light text-dark px-3 py-2',
+                                        ];
 
-    $translatedStatus = $statusTranslations[$order->status] ?? ucfirst($order->status);
-@endphp
+                                        // Terjemahan status ke Bahasa Indonesia
+                                        $statusTranslations = [
+                                            'pending' => 'Menunggu Pembayaran',
+                                            'paid' => 'Sudah Dibayar',
+                                            'shipped' => 'Sedang Dikirim',
+                                            'completed' => 'Selesai',
+                                            'cancelled' => 'Dibatalkan',
+                                        ];
 
-<div class="d-flex justify-content-between flex-wrap mb-4 border-bottom pb-3">
-    <div>
-        <h5 class="mb-1">Pesanan #{{ $order->id }}</h5>
-        <small class="text-muted">
-            Waktu Pemesanan: {{ \Carbon\Carbon::parse($order->ordered_at)->format('d M Y, H:i') }}
-        </small>
-    </div>
-    <div class="text-end mt-2 mt-md-0">
-        <span class="badge bg-warning text-dark px-3 py-2">
-            {{ $translatedStatus }}
-        </span><br>
-        <small class="text-muted">
-            Metode Pembayaran: <strong>{{ strtoupper($order->payment_method) }}</strong>
-        </small>
-    </div>
-</div>
+                                        $statusKey = $order->status;
+                                        $translatedStatus = $statusTranslations[$statusKey] ?? ucfirst($statusKey);
+                                        $badgeClass = $badgeClasses[$statusKey] ?? $badgeClasses['default'];
+                                    @endphp
 
+                                    <div class="d-flex justify-content-between flex-wrap mb-4 border-bottom pb-3">
+                                        <div>
+                                            <h5 class="mb-1">Pesanan #{{ $order->id }}</h5>
+                                            <small class="text-muted">
+                                                Waktu Pemesanan:
+                                                {{ \Carbon\Carbon::parse($order->ordered_at)->format('d M Y, H:i') }}
+                                            </small>
+                                        </div>
+                                        <div class="text-end mt-2 mt-md-0">
+                                            <span class="{{ $badgeClass }}">{{ $translatedStatus }}</span><br>
+                                            <small class="text-muted">
+                                                Metode Pembayaran: <strong>{{ strtoupper($order->payment_method) }}</strong>
+                                            </small>
+                                        </div>
+                                    </div>
 
                                     <div class="mb-4">
                                         <h6 class="fw-bold">Dikirim ke:</h6>

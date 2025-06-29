@@ -19,11 +19,9 @@
                                     <h4>Alamat Tersimpan</h4>
                                 </div>
                                 <div class="address-body">
-                                    {{-- Tombol Tambah --}}
                                     <a href="#" class="add-address hover-btn" data-bs-toggle="modal"
                                         data-bs-target="#addAddressModal">+ Tambah Alamat Baru</a>
 
-                                    {{-- Daftar Alamat --}}
                                     @foreach ($addresses as $address)
                                         <div class="address-item">
                                             <div class="address-icon1">

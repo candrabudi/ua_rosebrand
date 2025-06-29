@@ -121,20 +121,44 @@
                                 <div class="ddsh-body">
                                     @php use Carbon\Carbon; @endphp
 
+                                    @php
+                                        $badgeColors = [
+                                            'pending' => 'warning',
+                                            'paid' => 'info',
+                                            'shipped' => 'secondary',
+                                            'completed' => 'success',
+                                            'cancelled' => 'danger',
+                                            'default' => 'light',
+                                        ];
+
+                                        $statusTranslations = [
+                                            'pending' => 'Menunggu Pembayaran',
+                                            'paid' => 'Sudah Dibayar',
+                                            'shipped' => 'Sedang Dikirim',
+                                            'completed' => 'Selesai',
+                                            'cancelled' => 'Dibatalkan',
+                                        ];
+                                    @endphp
+
                                     @forelse ($recentOrders as $order)
+                                        @php
+                                            $status = $order->status;
+                                            $badgeColor = $badgeColors[$status] ?? $badgeColors['default'];
+                                            $translatedStatus = $statusTranslations[$status] ?? ucfirst($status);
+                                        @endphp
+
                                         <div class="mb-4 pb-3 border-bottom">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div>
                                                     <h6 class="mb-1">
                                                         {{ count($order->orderItems) }} Barang -
-                                                        <span
-                                                            class="badge bg-{{ $order->status === 'pending' ? 'warning' : ($order->status === 'completed' ? 'success' : 'secondary') }}">
-                                                            {{ ucfirst(__($order->status)) }}
+                                                        <span class="badge bg-{{ $badgeColor }}">
+                                                            {{ $translatedStatus }}
                                                         </span>
                                                     </h6>
                                                     <small class="text-muted">
                                                         Tanggal:
-                                                        {{ Carbon::parse($order->ordered_at)->format('d M Y, H:i') }}
+                                                        {{ \Carbon\Carbon::parse($order->ordered_at)->format('d M Y, H:i') }}
                                                     </small>
                                                 </div>
                                             </div>
@@ -152,6 +176,7 @@
                                     @empty
                                         <div class="text-muted">Belum ada pesanan terbaru.</div>
                                     @endforelse
+
                                 </div>
                             </div>
                         </div>
