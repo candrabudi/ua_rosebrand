@@ -6,7 +6,6 @@
         <p class="text-gray-500 text-sm">Semua informasi penting tentang pelanggan & riwayat pesanan</p>
     </div>
 
-    {{-- Statistik Ringkasan --}}
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
         @foreach ([
             'Total Pengeluaran' => ['amount' => $stats['total_spending'], 'color' => 'text-primary'],
@@ -25,7 +24,6 @@
         @endforeach
     </div>
 
-    {{-- Informasi Customer --}}
     <div class="bg-white dark:bg-dark-card shadow-sm rounded-lg p-6 mb-6">
         <h4 class="text-lg font-semibold mb-3">Informasi Umum</h4>
         <ul class="text-sm text-gray-700 dark:text-gray-200 space-y-1">
@@ -35,7 +33,6 @@
         </ul>
     </div>
 
-    {{-- Alamat --}}
     <div class="bg-white dark:bg-dark-card shadow-sm rounded-lg p-6 mb-6">
         <h4 class="text-lg font-semibold mb-3">Alamat Pengiriman</h4>
         @if ($customer->addresses->isEmpty())
@@ -61,7 +58,6 @@
         @endif
     </div>
 
-    {{-- Riwayat Pesanan --}}
     <div class="bg-white dark:bg-dark-card shadow-sm rounded-lg p-6" style="margin-bottom: 20px;">
         <h4 class="text-lg font-semibold mb-3">Riwayat Order</h4>
         @if ($customer->orders->isEmpty())

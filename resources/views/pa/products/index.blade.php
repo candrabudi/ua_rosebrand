@@ -104,7 +104,6 @@
                 </div>
                 <nav>
                     <ul class="flex items-center gap-1">
-                        {{-- Previous Page Link --}}
                         @if ($products->onFirstPage())
                             <li>
                                 <span
@@ -121,9 +120,7 @@
                             </li>
                         @endif
 
-                        {{-- Pagination Elements --}}
                         @foreach ($products->links()->elements as $element)
-                            {{-- "Three Dots" Separator --}}
                             @if (is_string($element))
                                 <li>
                                     <span
@@ -133,7 +130,6 @@
                                 </li>
                             @endif
 
-                            {{-- Array Of Links --}}
                             @if (is_array($element))
                                 @foreach ($element as $page => $url)
                                     <li>
@@ -146,7 +142,6 @@
                             @endif
                         @endforeach
 
-                        {{-- Next Page Link --}}
                         @if ($products->hasMorePages())
                             <li>
                                 <a href="{{ $products->nextPageUrl() }}"

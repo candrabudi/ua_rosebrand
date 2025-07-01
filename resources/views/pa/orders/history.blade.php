@@ -12,16 +12,13 @@
             <form method="GET" action="{{ route('pa.orders.history') }}"
                 class="w-full bg-white dark:bg-dark-card p-6 rounded-xl shadow-sm mb-6 border border-gray-200 dark:border-dark-border">
                 <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-                    {{-- Title --}}
                     <div>
                         <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Filter Riwayat Order</h2>
                         <p class="text-sm text-gray-500 dark:text-gray-400">Gunakan filter di bawah ini untuk menyaring data
                             order berdasarkan nama customer, status, dan tanggal pemesanan.</p>
                     </div>
 
-                    {{-- Filters --}}
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
-                        {{-- Search --}}
                         <div class="relative">
 
                             <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Nama Customer</label>
@@ -36,7 +33,6 @@
                             </div>
                         </div>
 
-                        {{-- Status --}}
                         <div>
                             <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Status Order</label>
                             <select name="status" class="form-input form-select h-10 py-0 w-full">
@@ -53,14 +49,12 @@
                             </select>
                         </div>
 
-                        {{-- Date Range --}}
                         <div>
                             <label class="block text-sm text-gray-700 dark:text-gray-300 mb-1">Rentang Tanggal</label>
                             <input type="text" name="date_range" id="date-range" value="{{ request('date_range') }}"
                                 class="form-input w-full h-10 py-2 rounded-md" placeholder="Pilih rentang tanggal">
                         </div>
 
-                        {{-- Filter Button --}}
                         <div class="flex items-end">
                             <button type="submit"
                                 class="btn b-light btn-primary-light dk-theme-card-square w-full h-10">Terapkan

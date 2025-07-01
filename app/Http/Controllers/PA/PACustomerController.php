@@ -35,7 +35,6 @@ class PACustomerController extends Controller
 
         $orders = $customer->orders;
 
-        // Statistik
         $totalSpending = $orders->where('status', 'completed')->flatMap->orderItems->sum(function ($item) {
             return $item->price * $item->quantity;
         });

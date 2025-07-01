@@ -15,7 +15,6 @@
                                 <h2>Halo, {{ $customer->full_name }}</h2>
                             </div>
 
-                            {{-- Alert jika belum punya alamat --}}
                             @if (!$hasAddress)
                                 <div class="alert alert-warning mt-3">
                                     <strong>Alamat belum tersedia!</strong> Silakan tambahkan alamat terlebih dahulu untuk
@@ -26,7 +25,6 @@
                             @endif
                         </div>
 
-                        {{-- Statistik --}}
                         <div class="col-md-4">
                             <div class="pdpt-bg">
                                 <div class="pdpt-title">
@@ -58,7 +56,6 @@
                             </div>
                         </div>
 
-                        {{-- Alamat Utama --}}
                         <div class="col-lg-12 mt-3">
                             <div class="card shadow-sm border-0 rounded-4 mb-4">
                                 <div class="card-body p-4">

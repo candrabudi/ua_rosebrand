@@ -27,11 +27,9 @@ class UACartController extends Controller
             ->first();
 
         if ($cartItem) {
-            // Jika produk sudah ada, tambahkan quantity
             $cartItem->quantity += $request->quantity;
             $cartItem->save();
         } else {
-            // Jika belum ada, buat entri baru
             Cart::create([
                 'customer_id' => $customer->id,
                 'product_id' => $request->product_id,
@@ -97,8 +95,8 @@ class UACartController extends Controller
 
         foreach ($carts as $cart) {
             $product = $cart->product;
-            $discountPrice = $product->price; // contoh: harga akhir
-            $originalPrice = $product->price * 1.2; // asumsi diskon 20%
+            $discountPrice = $product->price;
+            $originalPrice = $product->price * 1.2;
 
             $items[] = [
                 'id'         => $cart->id,

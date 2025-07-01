@@ -15,7 +15,6 @@
             <form method="GET" action="{{ route('pa.report.monthly') }}"
                 class="w-full bg-white dark:bg-dark-card p-4 rounded-xl shadow-sm mb-4 border border-gray-200 dark:border-dark-border">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-                    {{-- Status --}}
                     <div class="space-y-1">
                         <label class="block text-sm text-gray-700 dark:text-gray-300">Status</label>
                         <select name="status" class="form-input form-select w-full h-11">
@@ -30,7 +29,6 @@
                         </select>
                     </div>
 
-                    {{-- Bulan --}}
                     <div class="space-y-1">
                         <label class="block text-sm text-gray-700 dark:text-gray-300">Bulan</label>
                         <select name="month" class="form-input form-select w-full h-11">
@@ -43,14 +41,12 @@
                         </select>
                     </div>
 
-                    {{-- Tahun --}}
                     <div class="space-y-1">
                         <label class="block text-sm text-gray-700 dark:text-gray-300">Tahun</label>
                         <input type="number" name="year" class="form-input form-input-sm w-full"
                             value="{{ request('year', now()->year) }}">
                     </div>
 
-                    {{-- Tombol --}}
                     <div class="flex items-end">
                         <button class="btn btn-sm btn-primary w-full">Terapkan</button>
                     </div>
@@ -58,7 +54,6 @@
             </form>
 
 
-            {{-- Ringkasan --}}
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
                 @foreach ($summary as $label => $value)
                     <div class="p-4 bg-gray-50 dark:bg-dark-card rounded shadow-sm text-center">
@@ -68,7 +63,6 @@
                 @endforeach
             </div>
 
-            {{-- Table --}}
             <div class="overflow-x-auto">
                 <table class="table-auto w-full text-left text-sm">
                     <thead class="bg-gray-100 dark:bg-dark-card">

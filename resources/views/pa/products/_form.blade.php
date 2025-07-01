@@ -12,11 +12,10 @@
     <form action="{{ $action }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
         @if (isset($product))
-            @method('PUT') {{-- Gunakan PUT untuk update --}}
+            @method('PUT') 
         @endif
 
         <div class="grid grid-cols-2 gap-x-4 gap-y-5">
-            {{-- Nama Produk (col-auto on larger screens, col-span-full on small) --}}
             <div class="col-span-full xl:col-auto leading-none">
                 <label for="name" class="form-label mb-2">Nama Produk <span class="text-red-500">*</span></label>
                 <input type="text" id="name" name="name" value="{{ old('name', $product->name ?? '') }}"
@@ -27,7 +26,6 @@
                 @enderror
             </div>
 
-            {{-- Kategori (dengan gaya Dashkit) --}}
             <div class="col-span-full xl:col-auto leading-none">
                 <label for="category_id" class="form-label mb-2">Kategori <span class="text-red-500">*</span></label>
                 <div class="relative">
@@ -53,14 +51,12 @@
                 @enderror
             </div>
 
-            {{-- Merk --}}
             <div class="col-span-full md:col-auto leading-none">
                 <label for="brand" class="form-label mb-2">Merk</label>
                 <input type="text" id="brand" name="brand" value="{{ old('brand', $product->brand ?? '') }}"
                     class="form-input" placeholder="Contoh: Indofarma, Kimia Farma">
             </div>
 
-            {{-- Jumlah/Box --}}
             <div class="col-span-full md:col-auto leading-none">
                 <label for="quantity_per_box" class="form-label mb-2">Jumlah/Box <span
                         class="text-red-500">*</span></label>
@@ -73,7 +69,6 @@
                 @enderror
             </div>
 
-            {{-- Harga --}}
             <div class="col-span-full md:col-auto leading-none">
                 <label for="price" class="form-label mb-2">Harga <span class="text-red-500">*</span></label>
                 <input type="number" step="0.01" id="price" name="price"
@@ -85,16 +80,14 @@
                 @enderror
             </div>
 
-            {{-- Satuan --}}
             <div class="col-span-full md:col-auto leading-none">
                 <label for="unit_name" class="form-label mb-2">Satuan</label>
                 <input type="text" id="unit_name" name="unit_name"
                     value="{{ old('unit_name', $product->unit_name ?? '') }}" class="form-input"
                     placeholder="Contoh: Tablet, Kapsul, ml">
             </div>
-        </div> {{-- End of Main Grid for 2 columns --}}
+        </div>
 
-        {{-- Deskripsi (Col span full) --}}
         <div class="col-span-full leading-none">
             <label for="description" class="form-label mb-2">Deskripsi</label>
             <textarea id="description" name="description" rows="4"
@@ -105,12 +98,8 @@
             @enderror
         </div>
 
-        {{-- Gambar Produk (Col span full) --}}
         <div class="col-span-full leading-none">
-            {{-- Label Judul --}}
             <label for="image_upload" class="block mt-2 text-gray-700 dark:text-gray-300 text-sm font-medium">Gambar Produk</label>
-
-            {{-- Tombol Pilih File --}}
             <label for="image_upload"
                 class="inline-flex items-center px-4 py-2 bg-primary-500 text-white font-semibold text-sm rounded-md shadow-sm cursor-pointer
                hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2
@@ -120,7 +109,6 @@
                     onchange="document.getElementById('file_name_preview').innerText = this.files[0] ? this.files[0].name : 'Tidak ada file yang dipilih';">
             </label>
 
-            {{-- Teks Nama File di Bawah --}}
             <span id="file_name_preview" class="block mt-2 text-gray-700 dark:text-gray-300 text-sm font-medium">
                 @if (isset($product) && $product->image)
                     {{ basename($product->image) }}
@@ -129,12 +117,10 @@
                 @endif
             </span>
 
-            {{-- Pesan Error --}}
             @error('image')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
             @enderror
 
-            {{-- Gambar Preview Jika Ada --}}
             @if (isset($product) && $product->image)
                 <div class="mt-4">
                     <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Gambar Saat Ini:</p>
@@ -155,7 +141,6 @@
         </div>
     </form>
 </div>
-{{-- Tambahkan custom CSS untuk form-input-file jika belum ada --}}
 <style>
     .form-input-file {
         @apply block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary-500 file:text-white hover:file:bg-primary-600 dark:text-dark-text dark:file:bg-primary-600 dark:file:hover:bg-primary-700 border border-gray-300 dark:border-dark-border rounded-md;

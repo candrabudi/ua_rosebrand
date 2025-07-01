@@ -228,7 +228,6 @@
                                         </div>
                                     </div>
 
-                                    {{-- Script modal --}}
                                     <script>
                                         function openEditModal(id) {
                                             const modal = document.getElementById(`editAddressModal${id}`);

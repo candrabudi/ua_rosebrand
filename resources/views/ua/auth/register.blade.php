@@ -85,9 +85,6 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="copyright-text text-center mt-4">
-                        <i class="uil uil-copyright"></i>Copyright 2024 <b>PT  Sungai Budi</b> . All rights reserved
-                    </div> --}}
                 </div>
             </div>
         </div>

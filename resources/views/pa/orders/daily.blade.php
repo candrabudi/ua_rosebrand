@@ -59,7 +59,6 @@
                 @endforeach
             </div>
 
-            {{-- Table --}}
             <div class="overflow-x-auto">
                 <table class="table-auto w-full text-left text-sm">
                     <thead class="bg-gray-100 dark:bg-dark-card">

@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="grid grid-cols-12 gap-4 p-4">
-        <!-- KIRI: Table Kategori -->
         <div class="col-span-12 md:col-span-7">
             <div class="bg-white p-6 rounded-lg shadow-xl border border-gray-100">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 pb-3 sm:pb-7">
@@ -81,7 +80,7 @@
                 </div>
             </div>
         </div>
-        <!-- KANAN: Form Tambah / Edit -->
+
         <div class="col-span-12 md:col-span-5">
             <div class="bg-white p-5 rounded-xl shadow">
 
@@ -137,7 +136,6 @@
         </div>
     </div>
 
-    <!-- SweetAlert konfirmasi hapus -->
     <script>
         document.querySelectorAll('.delete-form').forEach(form => {
             form.addEventListener('submit', function(e) {

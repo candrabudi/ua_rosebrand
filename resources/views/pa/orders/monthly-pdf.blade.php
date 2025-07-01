@@ -16,7 +16,6 @@
 
     <h2>Laporan Order Tahunan - {{ $year }}</h2>
 
-    {{-- Summary Cards --}}
     <div class="summary">
         <div class="summary-card"><div class="summary-title">Total Order</div>{{ $summary['semua'] }}</div>
         <div class="summary-card"><div class="summary-title">Pending</div>{{ $summary['pending'] }}</div>

@@ -19,7 +19,6 @@
     <div class="all-product-grid">
         <div class="container">
 
-            <!-- Filter, Search, Sort -->
             <div class="row mb-4">
                 <form method="GET" action="{{ route('ua.products') }}">
                     <div class="row">
@@ -53,7 +52,6 @@
                 </form>
             </div>
 
-            <!-- Produk Grid -->
             <div class="row">
                 @forelse ($products as $product)
                     <div class="col-lg-3 col-md-6 mt-3">
@@ -91,20 +89,17 @@
                 @endforelse
             </div>
 
-            <!-- Pagination Manual -->
             @if ($products->hasPages())
                 <div class="row mt-4">
                     <div class="col-md-12 d-flex justify-content-center">
                         <nav>
                             <ul class="pagination">
-                                {{-- Previous Page Link --}}
                                 @if ($products->onFirstPage())
                                     <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
                                 @else
                                     <li class="page-item"><a class="page-link" href="{{ $products->previousPageUrl() }}" rel="prev">&laquo;</a></li>
                                 @endif
 
-                                {{-- Pagination Elements --}}
                                 @foreach ($products->getUrlRange(1, $products->lastPage()) as $page => $url)
                                     @if ($page == $products->currentPage())
                                         <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
@@ -113,7 +108,6 @@
                                     @endif
                                 @endforeach
 
-                                {{-- Next Page Link --}}
                                 @if ($products->hasMorePages())
                                     <li class="page-item"><a class="page-link" href="{{ $products->nextPageUrl() }}" rel="next">&raquo;</a></li>
                                 @else
