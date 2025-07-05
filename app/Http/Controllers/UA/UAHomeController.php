@@ -29,6 +29,7 @@ class UAHomeController extends Controller
                 'products.quantity',
                 'products.price',
                 'products.image',
+                'products.unit_name',
                 'products.created_at',
                 'products.updated_at',
             )
